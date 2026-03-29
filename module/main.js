@@ -65,7 +65,8 @@ class WarpsCharacterSheet extends WarpsSheetMixin(WarpsActorSheetBase) {
       height: 680
     },
     window: {
-      contentClasses: ["standard-form"]
+      contentClasses: ["standard-form"],
+      resizable: true
     },
     form: {
       submitOnChange: true

@@ -1,4 +1,18 @@
+.warps.sheet.actor.character .window-content > form {
+  display: block;
+  min-height: 100%;
+  overflow: visible;
+}
+
+.warps.sheet.actor.character .window-content {
+  overflow-y: auto;
+}
+
 .warps-sheet {
+  box-sizing: border-box;
+  height: auto;
+  min-height: 100%;
+  overflow: visible;
   padding: 1rem;
 }
 
@@ -14,6 +28,7 @@
 .warps-sheet .sheet-grid {
   display: grid;
   gap: 1rem;
+  padding-bottom: 1rem;
 }
 
 .warps-sheet .sheet-card {
