@@ -1,8 +1,8 @@
-<form class="warps-sheet {{cssClass}}" autocomplete="off">
+<section class="warps-sheet">
   <header class="sheet-header">
     <div class="identity">
-      <label for="actor-name">{{localize "WARPS.CharacterName"}}</label>
-      <input id="actor-name" name="name" type="text" value="{{actor.name}}" />
+      <label for="{{rootId}}-actor-name">{{localize "WARPS.CharacterName"}}</label>
+      <input id="{{rootId}}-actor-name" name="name" type="text" value="{{document.name}}" />
     </div>
   </header>
 
@@ -24,27 +24,27 @@
       <div class="resource-grid">
         <label class="field">
           <span>{{localize "WARPS.Resources.HPValue"}}</span>
-          <input name="system.resources.hp.value" type="number" value="{{actor.system.resources.hp.value}}" />
+          <input name="system.resources.hp.value" type="number" value="{{document.system.resources.hp.value}}" />
         </label>
         <label class="field field-readonly">
           <span>{{localize "WARPS.Resources.HPMin"}}</span>
-          <input type="number" value="{{actor.system.resources.hp.min}}" readonly />
+          <input type="number" value="{{document.system.resources.hp.min}}" readonly />
         </label>
         <label class="field field-readonly">
           <span>{{localize "WARPS.Resources.HPMax"}}</span>
-          <input type="number" value="{{actor.system.resources.hp.max}}" readonly />
+          <input type="number" value="{{document.system.resources.hp.max}}" readonly />
         </label>
         <label class="field">
           <span>{{localize "WARPS.Resources.EFFValue"}}</span>
-          <input name="system.resources.eff.value" type="number" value="{{actor.system.resources.eff.value}}" />
+          <input name="system.resources.eff.value" type="number" value="{{document.system.resources.eff.value}}" />
         </label>
         <label class="field field-readonly">
           <span>{{localize "WARPS.Resources.EFFMin"}}</span>
-          <input type="number" value="{{actor.system.resources.eff.min}}" readonly />
+          <input type="number" value="{{document.system.resources.eff.min}}" readonly />
         </label>
         <label class="field field-readonly">
           <span>{{localize "WARPS.Resources.EFFMax"}}</span>
-          <input type="number" value="{{actor.system.resources.eff.max}}" readonly />
+          <input type="number" value="{{document.system.resources.eff.max}}" readonly />
         </label>
       </div>
     </section>
@@ -61,4 +61,4 @@
       </div>
     </section>
   </section>
-</form>
+</section>

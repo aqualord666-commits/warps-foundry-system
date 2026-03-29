@@ -1,7 +1,9 @@
 const WARPS_STAT_KEYS = ["str", "foc", "ref", "per", "int", "dex", "end"];
 const WARPS_PROGRESS_KEYS = ["universalPoints", "combatPoints", "narrativePoints"];
-const WarpsActorSheetBase = foundry.appv1.sheets.ActorSheet;
-const WarpsActorsCollection = foundry.documents.collections.Actors;
+const WarpsActorDocument = CONFIG.Actor.documentClass;
+const WarpsActorSheetBase = foundry.applications.sheets.ActorSheetV2;
+const WarpsSheetMixin = foundry.applications.api.HandlebarsApplicationMixin;
+const WarpsSheetConfig = foundry.applications.apps.DocumentSheetConfig;
 
 class WarpsCharacterData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -55,35 +57,44 @@ class WarpsCharacterData extends foundry.abstract.TypeDataModel {
   }
 }
 
-class WarpsCharacterSheet extends WarpsActorSheetBase {
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["warps", "sheet", "actor", "character"],
+class WarpsCharacterSheet extends WarpsSheetMixin(WarpsActorSheetBase) {
+  static DEFAULT_OPTIONS = {
+    classes: ["warps", "sheet", "actor", "character"],
+    position: {
       width: 720,
       height: 680
-    });
-  }
+    },
+    window: {
+      contentClasses: ["standard-form"]
+    },
+    form: {
+      submitOnChange: true
+    }
+  };
 
-  get template() {
-    return "systems/warps/templates/actor/character-sheet.hbs";
-  }
+  static PARTS = {
+    sheet: {
+      template: "systems/warps/templates/actor/character-sheet.hbs",
+      root: true,
+      scrollable: [".sheet-grid"]
+    }
+  };
 
-  async getData(options = {}) {
-    const context = await super.getData(options);
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
 
-    return {
-      ...context,
+    return Object.assign(context, {
       stats: WARPS_STAT_KEYS.map((key) => ({
         key,
         label: game.i18n.localize(`WARPS.Stats.${key}`),
-        value: context.actor.system.stats[key]
+        value: context.document.system.stats[key]
       })),
       progression: WARPS_PROGRESS_KEYS.map((key) => ({
         key,
         label: game.i18n.localize(`WARPS.Progression.${key}`),
-        value: context.actor.system.progression[key]
+        value: context.document.system.progression[key]
       }))
-    };
+    });
   }
 }
 
@@ -94,8 +105,10 @@ Hooks.once("init", () => {
     character: WarpsCharacterData
   };
 
-  WarpsActorsCollection.unregisterSheet("core", WarpsActorSheetBase);
-  WarpsActorsCollection.registerSheet("warps", WarpsCharacterSheet, {
+  WarpsSheetConfig.unregisterSheet(WarpsActorDocument, "core", WarpsActorSheetBase, {
+    types: ["character"]
+  });
+  WarpsSheetConfig.registerSheet(WarpsActorDocument, "warps", WarpsCharacterSheet, {
     types: ["character"],
     makeDefault: true
   });
