@@ -1,4 +1,4 @@
-# Warps System
+# WARPS System
 
 Custom RPG system for Foundry Virtual Tabletop.
 
