@@ -24,27 +24,27 @@
       <div class="resource-grid">
         <label class="field">
           <span>{{localize "WARPS.Resources.HPValue"}}</span>
-          <input name="system.resources.hp.value" type="number" value="{{document.system.resources.hp.value}}" />
+          <input name="system.resources.hp.value" type="number" value="{{resourceBounds.hp.value}}" />
         </label>
         <label class="field field-readonly">
           <span>{{localize "WARPS.Resources.HPMin"}}</span>
-          <input type="number" value="{{document.system.resources.hp.min}}" readonly />
+          <input type="number" value="{{resourceBounds.hp.min}}" readonly />
         </label>
         <label class="field field-readonly">
           <span>{{localize "WARPS.Resources.HPMax"}}</span>
-          <input type="number" value="{{document.system.resources.hp.max}}" readonly />
+          <input type="number" value="{{resourceBounds.hp.max}}" readonly />
         </label>
         <label class="field">
           <span>{{localize "WARPS.Resources.EFFValue"}}</span>
-          <input name="system.resources.eff.value" type="number" value="{{document.system.resources.eff.value}}" />
+          <input name="system.resources.eff.value" type="number" value="{{resourceBounds.eff.value}}" />
         </label>
         <label class="field field-readonly">
           <span>{{localize "WARPS.Resources.EFFMin"}}</span>
-          <input type="number" value="{{document.system.resources.eff.min}}" readonly />
+          <input type="number" value="{{resourceBounds.eff.min}}" readonly />
         </label>
         <label class="field field-readonly">
           <span>{{localize "WARPS.Resources.EFFMax"}}</span>
-          <input type="number" value="{{document.system.resources.eff.max}}" readonly />
+          <input type="number" value="{{resourceBounds.eff.max}}" readonly />
         </label>
       </div>
     </section>

@@ -5,30 +5,48 @@ const WarpsActorSheetBase = foundry.applications.sheets.ActorSheetV2;
 const WarpsSheetMixin = foundry.applications.api.HandlebarsApplicationMixin;
 const WarpsSheetConfig = foundry.applications.apps.DocumentSheetConfig;
 
+function getWarpsResourceBounds(system) {
+  const strength = Math.max(system.stats?.str ?? 0, 0);
+  const endurance = Math.max(system.stats?.end ?? 0, 0);
+  const maxHp = strength * 5;
+  const minHp = -maxHp;
+  const hpValue = system.resources?.hp?.value;
+  const effValue = system.resources?.eff?.value ?? 0;
+
+  return {
+    hp: {
+      min: minHp,
+      max: maxHp,
+      value: hpValue == null ? maxHp : Math.clamp(hpValue, minHp, maxHp)
+    },
+    eff: {
+      min: 0,
+      max: endurance,
+      value: Math.clamp(effValue, 0, endurance)
+    }
+  };
+}
+
 class WarpsCharacterData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     const fields = foundry.data.fields;
 
     return {
       stats: new fields.SchemaField({
-        str: new fields.NumberField({ initial: 10, integer: true }),
-        foc: new fields.NumberField({ initial: 10, integer: true }),
-        ref: new fields.NumberField({ initial: 10, integer: true }),
-        per: new fields.NumberField({ initial: 10, integer: true }),
-        int: new fields.NumberField({ initial: 10, integer: true }),
-        dex: new fields.NumberField({ initial: 10, integer: true }),
-        end: new fields.NumberField({ initial: 10, integer: true })
+        str: new fields.NumberField({ initial: 10, integer: true, min: 0 }),
+        foc: new fields.NumberField({ initial: 10, integer: true, min: 0 }),
+        ref: new fields.NumberField({ initial: 10, integer: true, min: 0 }),
+        per: new fields.NumberField({ initial: 10, integer: true, min: 0 }),
+        int: new fields.NumberField({ initial: 10, integer: true, min: 0 }),
+        dex: new fields.NumberField({ initial: 10, integer: true, min: 0 }),
+        end: new fields.NumberField({ initial: 10, integer: true, min: 0 })
       }),
       resources: new fields.SchemaField({
         eff: new fields.SchemaField({
-          value: new fields.NumberField({ initial: 0, integer: true }),
-          min: new fields.NumberField({ initial: 0, integer: true }),
-          max: new fields.NumberField({ initial: 0, integer: true })
+          value: new fields.NumberField({ initial: 0, integer: true, min: 0 })
         }),
         hp: new fields.SchemaField({
-          value: new fields.NumberField({ initial: null, integer: true, nullable: true }),
-          min: new fields.NumberField({ initial: 0, integer: true }),
-          max: new fields.NumberField({ initial: 0, integer: true })
+          value: new fields.NumberField({ initial: null, integer: true, nullable: true })
         })
       }),
       progression: new fields.SchemaField({
@@ -40,20 +58,10 @@ class WarpsCharacterData extends foundry.abstract.TypeDataModel {
   }
 
   prepareDerivedData() {
-    const strength = this.stats.str ?? 0;
-    const endurance = Math.max(this.stats.end ?? 0, 0);
-    const maxHp = strength * 5;
-    const minHp = -maxHp;
+    const resourceBounds = getWarpsResourceBounds(this);
 
-    this.resources.eff.min = 0;
-    this.resources.eff.max = endurance;
-    this.resources.eff.value = Math.clamp(this.resources.eff.value ?? 0, 0, endurance);
-
-    this.resources.hp.max = maxHp;
-    this.resources.hp.min = minHp;
-    this.resources.hp.value = this.resources.hp.value == null
-      ? maxHp
-      : Math.clamp(this.resources.hp.value, minHp, maxHp);
+    this.resources.eff.value = resourceBounds.eff.value;
+    this.resources.hp.value = resourceBounds.hp.value;
   }
 }
 
@@ -85,6 +93,7 @@ class WarpsCharacterSheet extends WarpsSheetMixin(WarpsActorSheetBase) {
     const context = await super._prepareContext(options);
 
     return Object.assign(context, {
+      resourceBounds: getWarpsResourceBounds(context.document.system),
       stats: WARPS_STAT_KEYS.map((key) => ({
         key,
         label: game.i18n.localize(`WARPS.Stats.${key}`),
@@ -106,9 +115,6 @@ Hooks.once("init", () => {
     character: WarpsCharacterData
   };
 
-  WarpsSheetConfig.unregisterSheet(WarpsActorDocument, "core", WarpsActorSheetBase, {
-    types: ["character"]
-  });
   WarpsSheetConfig.registerSheet(WarpsActorDocument, "warps", WarpsCharacterSheet, {
     types: ["character"],
     makeDefault: true
