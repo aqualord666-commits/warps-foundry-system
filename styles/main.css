@@ -1,3 +1,46 @@
-body {
-    background: #1e1e1e;
-  }
+.warps-sheet {
+  padding: 1rem;
+}
+
+.warps-sheet .sheet-header {
+  margin-bottom: 1rem;
+}
+
+.warps-sheet .identity {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.warps-sheet .sheet-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.warps-sheet .sheet-card {
+  border: 1px solid #7a7a7a;
+  border-radius: 10px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.warps-sheet .sheet-card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.warps-sheet .stat-grid,
+.warps-sheet .resource-grid,
+.warps-sheet .progress-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.75rem;
+}
+
+.warps-sheet .field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.warps-sheet .field input[readonly] {
+  opacity: 0.75;
+}

@@ -1,3 +1,23 @@
 {
-    "WARPS.Hello": "Hello World"
-  }
+  "WARPS.Hello": "Hello World",
+  "WARPS.CharacterName": "Character Name",
+  "WARPS.Sections.Stats": "Stats",
+  "WARPS.Sections.Resources": "Resources",
+  "WARPS.Sections.Progression": "Progression",
+  "WARPS.Stats.str": "Strength",
+  "WARPS.Stats.foc": "Focus",
+  "WARPS.Stats.ref": "Reflex",
+  "WARPS.Stats.per": "Perception",
+  "WARPS.Stats.int": "Intellect",
+  "WARPS.Stats.dex": "Dexterity",
+  "WARPS.Stats.end": "Endurance",
+  "WARPS.Resources.HPValue": "HP",
+  "WARPS.Resources.HPMin": "HP Min",
+  "WARPS.Resources.HPMax": "HP Max",
+  "WARPS.Resources.EFFValue": "EFF",
+  "WARPS.Resources.EFFMin": "EFF Min",
+  "WARPS.Resources.EFFMax": "EFF Max",
+  "WARPS.Progression.universalPoints": "Universal Points",
+  "WARPS.Progression.combatPoints": "Combat Points",
+  "WARPS.Progression.narrativePoints": "Narrative Points"
+}

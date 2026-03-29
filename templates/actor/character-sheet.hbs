@@ -1,0 +1,64 @@
+<form class="warps-sheet {{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <div class="identity">
+      <label for="actor-name">{{localize "WARPS.CharacterName"}}</label>
+      <input id="actor-name" name="name" type="text" value="{{actor.name}}" />
+    </div>
+  </header>
+
+  <section class="sheet-grid">
+    <section class="sheet-card">
+      <h2>{{localize "WARPS.Sections.Stats"}}</h2>
+      <div class="stat-grid">
+        {{#each stats as |stat|}}
+          <label class="field">
+            <span>{{stat.label}}</span>
+            <input name="system.stats.{{stat.key}}" type="number" value="{{stat.value}}" />
+          </label>
+        {{/each}}
+      </div>
+    </section>
+
+    <section class="sheet-card">
+      <h2>{{localize "WARPS.Sections.Resources"}}</h2>
+      <div class="resource-grid">
+        <label class="field">
+          <span>{{localize "WARPS.Resources.HPValue"}}</span>
+          <input name="system.resources.hp.value" type="number" value="{{actor.system.resources.hp.value}}" />
+        </label>
+        <label class="field field-readonly">
+          <span>{{localize "WARPS.Resources.HPMin"}}</span>
+          <input type="number" value="{{actor.system.resources.hp.min}}" readonly />
+        </label>
+        <label class="field field-readonly">
+          <span>{{localize "WARPS.Resources.HPMax"}}</span>
+          <input type="number" value="{{actor.system.resources.hp.max}}" readonly />
+        </label>
+        <label class="field">
+          <span>{{localize "WARPS.Resources.EFFValue"}}</span>
+          <input name="system.resources.eff.value" type="number" value="{{actor.system.resources.eff.value}}" />
+        </label>
+        <label class="field field-readonly">
+          <span>{{localize "WARPS.Resources.EFFMin"}}</span>
+          <input type="number" value="{{actor.system.resources.eff.min}}" readonly />
+        </label>
+        <label class="field field-readonly">
+          <span>{{localize "WARPS.Resources.EFFMax"}}</span>
+          <input type="number" value="{{actor.system.resources.eff.max}}" readonly />
+        </label>
+      </div>
+    </section>
+
+    <section class="sheet-card">
+      <h2>{{localize "WARPS.Sections.Progression"}}</h2>
+      <div class="progress-grid">
+        {{#each progression as |entry|}}
+          <label class="field">
+            <span>{{entry.label}}</span>
+            <input name="system.progression.{{entry.key}}" type="number" value="{{entry.value}}" min="0" />
+          </label>
+        {{/each}}
+      </div>
+    </section>
+  </section>
+</form>

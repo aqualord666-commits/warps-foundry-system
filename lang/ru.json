@@ -1,3 +1,23 @@
 {
-    "WARPS.Hello": "Привет мир"
-  }
+  "WARPS.Hello": "Привет, мир",
+  "WARPS.CharacterName": "Имя персонажа",
+  "WARPS.Sections.Stats": "Характеристики",
+  "WARPS.Sections.Resources": "Ресурсы",
+  "WARPS.Sections.Progression": "Прогрессия",
+  "WARPS.Stats.str": "Сила",
+  "WARPS.Stats.foc": "Фокус",
+  "WARPS.Stats.ref": "Рефлекс",
+  "WARPS.Stats.per": "Восприятие",
+  "WARPS.Stats.int": "Интеллект",
+  "WARPS.Stats.dex": "Ловкость",
+  "WARPS.Stats.end": "Выносливость",
+  "WARPS.Resources.HPValue": "HP",
+  "WARPS.Resources.HPMin": "Минимум HP",
+  "WARPS.Resources.HPMax": "Максимум HP",
+  "WARPS.Resources.EFFValue": "EFF",
+  "WARPS.Resources.EFFMin": "Минимум EFF",
+  "WARPS.Resources.EFFMax": "Максимум EFF",
+  "WARPS.Progression.universalPoints": "Универсальные очки",
+  "WARPS.Progression.combatPoints": "Боевые очки",
+  "WARPS.Progression.narrativePoints": "Наративные очки"
+}
